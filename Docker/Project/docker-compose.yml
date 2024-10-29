@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  postgres:
+    image: docker.io/postgres
+    environment:
+      POSTGRES_PASSWORD: postgres_password
+      POSTGRES_DB: simple_blog_api
+    ports:
+      - "5432:5432"
+
+  api:
+    build: ./  # Adjust path as necessary
+    image: docker.io/geethakakani/simple-blog-api
+    environment:
+      POSTGRES_USERNAME: postgres
+      POSTGRES_HOST: postgres
+      POSTGRES_DB: simple_blog_api
+      POSTGRES_PASSWORD: postgres_password
+      POSTGRES_PORT: 5432
+      PORT: 8080
+    ports:
+      - "8080:8080"
