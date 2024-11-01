@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-blog-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: simple-blog-api
+  template:
+    metadata:
+      labels:
+        app: simple-blog-api
+    spec:
+      containers:
+        - name: simple-blog-api
+          image: docker.io/geethakakani1/simple-blog-api
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DATABASE_URL
+              value: "postgres://postgres:passpostgres_password@postgres-service:5432/simple_blog_api"
